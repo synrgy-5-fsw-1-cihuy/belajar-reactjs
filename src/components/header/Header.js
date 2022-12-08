@@ -23,7 +23,7 @@ const Header = (props) => {
             <button onClick={() => setName("Dila")}>Ganti pemeran</button>
             <button onClick={() => setAge(20)}>Umur {props.name}</button>
             <h2>Roni suka main air bersama {name}</h2>
-            <h3>{props.name} sudah berumur {props.age}</h3>
+            <h3>{props.name} sudah berumur {age}</h3>
             <h4>{props.person.name}</h4>
         </div>
     );

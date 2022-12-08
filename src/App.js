@@ -1,6 +1,9 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Content from './components/content/Content';
+import Contact from './components/contact/Contact';
+// import Content from './components/content/Content';
 import Header from './components/header/Header';
+import Profile from './components/profile/Profile';
 
 function App() {
   const person = {
@@ -14,10 +17,16 @@ function App() {
       age={20}
       person={person}
       />
-      <Content 
+      <Router>
+         <Routes>
+            <Route path='/contact' element={<Contact />} />
+            <Route path='/profile' element={<Profile />} />
+         </Routes>
+      </Router>
+      {/* <Content 
       name="Jalil"
       age={20}
-      />
+      /> */}
       {/* FAQ */}
       {/* Footer */}
       
