@@ -6,13 +6,14 @@ const USER_ENDPOINT_URL = 'https://jsonplaceholder.typicode.com/users';
 const User = () => {
     const [users, setUsers] = useState([]);
 
-    useEffect(() => {
-        async function getAllUsers() {
-            const users = await axios.get(USER_ENDPOINT_URL);
-            console.log("Users :", users.data);
+    async function getAllUsers() {
+        const users = await axios.get(USER_ENDPOINT_URL);
+        console.log("Users :", users.data);
 
-            setUsers(users.data);
-        };
+        setUsers(users.data);
+    };
+
+    useEffect(() => {
         getAllUsers();
     }, []);
 
