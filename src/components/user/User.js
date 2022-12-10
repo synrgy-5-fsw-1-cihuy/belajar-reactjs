@@ -1,19 +1,23 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const USER_ENDPOINT_URL = 'https://jsonplaceholder.typicode.com/users';
 const POST_ENDPOINT_URL = 'https://jsonplaceholder.typicode.com/posts';
 const CAR_ENDPOINT_URL = 'http://localhost:8001/api/cars';
 
 const User = () => {
-    const [users, setUsers] = useState([]);
+    const [cars, setCars] = useState([]);
     const [file, setFile] = useState('');
 
-    async function getAllUsers() {
-        const users = await axios.get(USER_ENDPOINT_URL);
-        console.log("Users :", users.data);
+    async function getAllCars() {
+        const cars = await axios.get(CAR_ENDPOINT_URL, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('AUTH_TOKEN')}`
+            }
+        });
 
-        setUsers(users.data);
+        console.log("Cars :", cars.data.data);
+
+        setCars(cars.data.data);
     };
 
     async function createNewPost() {
@@ -46,7 +50,7 @@ const User = () => {
     } 
 
     useEffect(() => {
-        getAllUsers();
+        getAllCars();
     }, []);
 
     return (
@@ -60,20 +64,20 @@ const User = () => {
                         <th>No</th>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Username</th>
-                        <th>Phone</th>
+                        <th>Price</th>
+                        <th>Size</th>
                     </tr>
                 </thead>
                 <tbody>
-                {users.map((value, index) => {
+                {cars.map((value, index) => {
                     return (
                         <>
                             <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>{value.id}</td>
                                 <td>{value.name}</td>
-                                <td>{value.username}</td>
-                                <td>{value.phone}</td>
+                                <td>{value.price}</td>
+                                <td>{value.size}</td>
                             </tr>
                         </>
                     )
