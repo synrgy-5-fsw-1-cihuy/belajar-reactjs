@@ -1,4 +1,4 @@
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider, GoogleLogin, googleLogout } from '@react-oauth/google';
 
 const OAuth = () => {
     return(
@@ -11,8 +11,9 @@ const OAuth = () => {
             onError={() => {
                 console.log('Login Failed');
             }}
-            />;
+            />
            </GoogleOAuthProvider>
+           <button onClick={() => googleLogout()}>Logout From Google</button>
         </div>
     )
 };
