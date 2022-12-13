@@ -2,6 +2,8 @@ const initialState = {
     tasks: ['Joo', 'Jalil']
 };
 
+const tempArray = [];
+
 const appReducer = (state = initialState, action) => {
 
     switch(action.type) {
@@ -11,8 +13,9 @@ const appReducer = (state = initialState, action) => {
                 tasks: state.tasks.concat(action.task)
             }
         case 'REMOVE_TASK':
+            state.tasks.pop();
             return {
-                tasks: state.tasks.pop()
+                ...state
             }
         default:
             return state;
