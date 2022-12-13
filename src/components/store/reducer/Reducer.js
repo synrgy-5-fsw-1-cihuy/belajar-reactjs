@@ -2,8 +2,6 @@ const initialState = {
     tasks: ['Joo', 'Jalil']
 };
 
-const tempArray = [];
-
 const appReducer = (state = initialState, action) => {
 
     switch(action.type) {
