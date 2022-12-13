@@ -1,5 +1,5 @@
 const initialState = {
-    tasks: ['Joo', 'Jalil']
+    persons: ['Joo', 'Jalil']
 };
 
 const appReducer = (state = initialState, action) => {
@@ -8,13 +8,16 @@ const appReducer = (state = initialState, action) => {
         case 'ADD_TASK':
             return {
                 ...state,
-                tasks: state.tasks.concat(action.task)
+                persons: state.persons.concat(action.task)
             }
         case 'REMOVE_TASK':
-            state.tasks.pop();
+            state.persons.pop();
             return {
                 ...state
             }
+        case 'CONSOLE':
+            console.log("LOG STATE FROM REDUCER :", state.persons);
+            return state;
         default:
             return state;
     }

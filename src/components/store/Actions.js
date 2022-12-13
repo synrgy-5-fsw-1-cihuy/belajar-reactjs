@@ -8,7 +8,13 @@ const removeTask = (task) => ({
     task
 });
 
+const consoleState = (task) => ({
+    type: 'CONSOLE',
+    task
+});
+
 export {
     addTask,
-    removeTask
+    removeTask,
+    consoleState
 }

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import { addTask, removeTask } from './components/store/Actions';
+import { addTask, removeTask, consoleState } from './components/store/Actions';
 // import Contact from './components/contact/Contact';
 // import Login from './components/login/Login';
 // import OAuth from './components/oauth/OAuth';
@@ -10,7 +10,7 @@ import { addTask, removeTask } from './components/store/Actions';
 // import User from './components/user/User';
 // import { addTask } from './components/store/Actions';
 
-function App({ appState, addNewTask, removeLastTask }) {
+function App({ appState, addNewTask, removeLastTask, debugConsoleState }) {
 
   const handleAddTask = () => {
     addNewTask('Ganda');
@@ -18,6 +18,10 @@ function App({ appState, addNewTask, removeLastTask }) {
 
   const handleRemoveTask = () => {
     removeLastTask();
+  }
+
+  const handleDebugConsoleState = () => {
+    debugConsoleState();
   }
 
   useEffect(() => {
@@ -37,10 +41,11 @@ function App({ appState, addNewTask, removeLastTask }) {
       </Router> */}
       <button onClick={() => handleAddTask()}>Add Task to State</button>
       <button onClick={() => handleRemoveTask()}>Remove Task from State</button>
+      <button onClick={() => handleDebugConsoleState()}>Debug Console State</button>
       <h3>List tasks</h3>
       <div>
-        { appState.tasks.map((task) => {
-          return <li>{task}</li>
+        { appState.persons.map((person) => {
+          return <li>{person}</li>
         })}
       </div>
     </div>
@@ -54,8 +59,9 @@ const mapStateToProps = (state) => ({
 
 // Map Dispatch Action to Props Comp
 const mapDispatchToProps = (dispatch) => ({
-  addNewTask: (task) => dispatch(addTask(task)),
-  removeLastTask: () => dispatch(removeTask())
+  addNewTask: (person) => dispatch(addTask(person)),
+  removeLastTask: () => dispatch(removeTask()),
+  debugConsoleState: () => dispatch(consoleState())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
