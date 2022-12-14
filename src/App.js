@@ -46,9 +46,9 @@ function App({ appState, addNewTask, removeLastTask, debugConsoleState }) {
       <button onClick={() => handleDebugConsoleState()}>Debug Console State</button>
       <h3>List tasks</h3>
       <div>
-        {/* { appState.people.map((peop) => {
+        { appState.peoples.map((peop) => {
           return <li>{peop}</li>
-        })} */}
+        })}
       </div>
     </div>
   );
@@ -56,7 +56,7 @@ function App({ appState, addNewTask, removeLastTask, debugConsoleState }) {
 
 // Map State Redux to State Comp
 const mapStateToProps = (state) => ({
-  appState: state.people
+  appState: state.appReducer
 });
 
 // Map Dispatch Action to Props Comp

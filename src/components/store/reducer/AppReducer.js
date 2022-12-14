@@ -1,5 +1,5 @@
 const initialStateApp = {
-    people: ['Joo', 'Jalil']
+    peoples: ['Joo', 'Jalil']
 };
 
 const appReducer = (state = initialStateApp, action) => {
@@ -8,7 +8,7 @@ const appReducer = (state = initialStateApp, action) => {
         case 'ADD_TASK':
             return {
                 ...state,
-                people: state.people.concat(action.task)
+                peoples: state.peoples.concat(action.payload)
             }
         case 'REMOVE_TASK':
             state.people.pop();
