@@ -8,7 +8,7 @@ const Header = ({ todoState, addNewTodo, removeTodoRecord }) => {
     // Effect Hook
     useEffect(() => {
         console.log(todoState);
-    }, []);
+    }, [todoState]);
 
     const handleAddNewTodo = () => {
         addNewTodo("Ipsum");
