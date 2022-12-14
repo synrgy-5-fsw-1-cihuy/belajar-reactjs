@@ -46,8 +46,8 @@ function App({ appState, addNewTask, removeLastTask, debugConsoleState }) {
       <button onClick={() => handleDebugConsoleState()}>Debug Console State</button>
       <h3>List tasks</h3>
       <div>
-        { appState.peoples.map((peop) => {
-          return <li>{peop}</li>
+        { appState.peoples.map((peop, index) => {
+          return <li key={index}>{peop}</li>
         })}
       </div>
     </div>

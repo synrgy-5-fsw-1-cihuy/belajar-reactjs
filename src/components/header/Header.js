@@ -23,8 +23,8 @@ const Header = ({ todoState, addNewTodo, removeTodoRecord }) => {
             Header components is works!
             <button onClick={() => handleAddNewTodo()}>Add New Todo</button>
             <button onClick={() => handleRemoveTodo()}>Remove Todo</button>
-            { todoState.todos.map((todo) => {
-                return <li>{ todo }</li>
+            { todoState.todos.map((todo, index) => {
+                return <li key={index}>{ todo }</li>
             })}
         </div>
     );
