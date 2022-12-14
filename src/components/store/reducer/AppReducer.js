@@ -1,8 +1,8 @@
-const initialState = {
+const initialStateApp = {
     people: ['Joo', 'Jalil']
 };
 
-const appReducer = (state = initialState, action) => {
+const appReducer = (state = initialStateApp, action) => {
 
     switch(action.type) {
         case 'ADD_TASK':

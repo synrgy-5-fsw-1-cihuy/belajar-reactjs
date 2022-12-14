@@ -13,8 +13,14 @@ const consoleState = (task) => ({
     task
 });
 
+const addTodo = (todo) => ({
+    type: 'ADD_TODO',
+    todo
+})
+
 export {
     addTask,
     removeTask,
-    consoleState
+    consoleState,
+    addTodo
 }

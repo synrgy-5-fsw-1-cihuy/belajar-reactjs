@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
+import Header from './components/header/Header';
 import { addTask, removeTask, consoleState } from './components/store/Actions';
 // import Contact from './components/contact/Contact';
 // import Login from './components/login/Login';
@@ -30,6 +31,7 @@ function App({ appState, addNewTask, removeLastTask, debugConsoleState }) {
 
   return (
     <div className="App">
+      <Header />
       {/* <Router>
          <Routes>
             <Route path='/login' element={<Login />} />
@@ -44,9 +46,9 @@ function App({ appState, addNewTask, removeLastTask, debugConsoleState }) {
       <button onClick={() => handleDebugConsoleState()}>Debug Console State</button>
       <h3>List tasks</h3>
       <div>
-        { appState.people.map((peop) => {
+        {/* { appState.people.map((peop) => {
           return <li>{peop}</li>
-        })}
+        })} */}
       </div>
     </div>
   );
@@ -54,7 +56,7 @@ function App({ appState, addNewTask, removeLastTask, debugConsoleState }) {
 
 // Map State Redux to State Comp
 const mapStateToProps = (state) => ({
-  appState: state
+  appState: state.people
 });
 
 // Map Dispatch Action to Props Comp

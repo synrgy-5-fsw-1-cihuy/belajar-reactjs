@@ -1,32 +1,37 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { addTodo } from "../store/Actions";
 
 // Functional component
-const Header = (props) => {
-    // Hook State
-    const [name, setName] = useState("Ilyas");
-    const [age, setAge] = useState(0);
+const Header = ({ todoState, addNewTodo }) => {
 
     // Effect Hook
     useEffect(() => {
-        setName("Hasan");
+        console.log(todoState);
     }, []);
 
-    // Effect Hook
-    useEffect(() => {
-        setAge(10);
-    }, []);
+    const handleAddNewTodo = () => {
+        console.log('test');
+        addNewTodo("Ipsum");
+    };
 
     return (
         <div>
             Header components is works!
-            {/* Event Handling */}
-            <button onClick={() => setName("Dila")}>Ganti pemeran</button>
-            <button onClick={() => setAge(20)}>Umur {props.name}</button>
-            <h2>Roni suka main air bersama {name}</h2>
-            <h3>{props.name} sudah berumur {age}</h3>
-            <h4>{props.person.name}</h4>
+            <button onClick={() => handleAddNewTodo()}>Add New Todo</button>
+            { todoState.todos.map((todo) => {
+                return <li>{ todo }</li>
+            })}
         </div>
     );
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+    todoState: state.todoReducer
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    addNewTodo: (todo) => dispatch(addTodo(todo))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
