@@ -16,11 +16,16 @@ const consoleState = (task) => ({
 const addTodo = (todo) => ({
     type: 'ADD_TODO',
     payload: todo
+});
+
+const removeTodo = () => ({
+    type: 'REMOVE_TODO'
 })
 
 export {
     addTask,
     removeTask,
     consoleState,
-    addTodo
+    addTodo,
+    removeTodo
 }

@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { addTodo } from "../store/Actions";
+import { addTodo, removeTodo } from "../store/Actions";
 
 // Functional component
-const Header = ({ todoState, addNewTodo }) => {
+const Header = ({ todoState, addNewTodo, removeTodoRecord }) => {
 
     // Effect Hook
     useEffect(() => {
@@ -11,14 +11,18 @@ const Header = ({ todoState, addNewTodo }) => {
     }, []);
 
     const handleAddNewTodo = () => {
-        console.log('test');
         addNewTodo("Ipsum");
     };
+
+    const handleRemoveTodo = () => {
+        removeTodoRecord();
+    }
 
     return (
         <div>
             Header components is works!
             <button onClick={() => handleAddNewTodo()}>Add New Todo</button>
+            <button onClick={() => handleRemoveTodo()}>Remove Todo</button>
             { todoState.todos.map((todo) => {
                 return <li>{ todo }</li>
             })}
@@ -31,7 +35,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    addNewTodo: (todo) => dispatch(addTodo(todo))
+    addNewTodo: (todo) => dispatch(addTodo(todo)),
+    removeTodoRecord: () => dispatch(removeTodo())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

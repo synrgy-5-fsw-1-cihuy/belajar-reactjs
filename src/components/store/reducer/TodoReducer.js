@@ -9,6 +9,12 @@ const todoReducer = (state = initialStateTodo, action) => {
                 ...state,
                 todos: state.todos.concat(action.payload)
             }
+        case "REMOVE_TODO":
+            state.todos.pop();
+
+            return {
+                ...state
+            };
     
         default:
             return state;
