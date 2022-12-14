@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -10,8 +11,16 @@ import { addTask, removeTask, consoleState } from './components/store/Actions';
 // import Profile from './components/profile/Profile';
 // import User from './components/user/User';
 // import { addTask } from './components/store/Actions';
+type ActionProps = {
+  appState: {
+    peoples: []
+  },
+  addNewTask: Function,
+  removeLastTask: Function,
+  debugConsoleState: Function
+}
 
-function App({ appState, addNewTask, removeLastTask, debugConsoleState }) {
+function App({ appState, addNewTask, removeLastTask, debugConsoleState }: ActionProps) {
 
   const handleAddTask = () => {
     addNewTask('Ganda');
@@ -46,7 +55,7 @@ function App({ appState, addNewTask, removeLastTask, debugConsoleState }) {
       <button onClick={() => handleDebugConsoleState()}>Debug Console State</button>
       <h3>List tasks</h3>
       <div>
-        { appState.peoples.map((peop, index) => {
+        { appState.peoples.map((peop: any, index: any) => {
           return <li key={index}>{peop}</li>
         })}
       </div>
@@ -55,13 +64,13 @@ function App({ appState, addNewTask, removeLastTask, debugConsoleState }) {
 }
 
 // Map State Redux to State Comp
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: any) => ({
   appState: state.appReducer
 });
 
 // Map Dispatch Action to Props Comp
-const mapDispatchToProps = (dispatch) => ({
-  addNewTask: (person) => dispatch(addTask(person)),
+const mapDispatchToProps = (dispatch: any) => ({
+  addNewTask: (person: any) => dispatch(addTask(person)),
   removeLastTask: () => dispatch(removeTask()),
   debugConsoleState: () => dispatch(consoleState())
 });
