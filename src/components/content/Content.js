@@ -1,79 +1,64 @@
-import Accordion from 'react-bootstrap/Accordion';
-import Table from 'react-bootstrap/Table';
-import style from "./Content.module.css";
-import {
-    Div, H1
-} from "./StyledDiv.js";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const Content = (props) => {
+const CARS_ENDPOINT_URL = 'http://localhost:8001/api/cars';
+
+const Content = () => {
+    const [cars, setCars] = useState([]);
+
+    useEffect(() => {
+        getAllCars();
+    }, []);
+
+    const getAllCars = async () => {
+        const cars = await axios.get(CARS_ENDPOINT_URL);
+        setCars(cars.data.data);
+    };
+
+    const onFilterCars = async (event) => {
+        const capacity = event.target.value;
+
+        if (capacity === "") {
+            getAllCars();
+        } else {
+            const filterCars = await axios.get(CARS_ENDPOINT_URL + '?capacity=' + capacity);
+            setCars(filterCars.data.data);
+        }
+        
+    };
+
     return (
         <div>
-            {/* CSS Module */}
-            <p className={style["Content"]}>Content component is works!</p>
-            {props.name} - {props.age}
-            <Div>
-                Halo
-                <H1>
-                    Judul coba dulu
-                </H1>
-            </Div>
-            <Accordion defaultActiveKey="0">
-                <Accordion.Item eventKey="0">
-                    <Accordion.Header>Accordion Item #1</Accordion.Header>
-                    <Accordion.Body>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.
-                    </Accordion.Body>
-                </Accordion.Item>
-                <Accordion.Item eventKey="1">
-                    <Accordion.Header>Accordion Item #2</Accordion.Header>
-                    <Accordion.Body>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.
-                    </Accordion.Body>
-                </Accordion.Item>
-            </Accordion>
+            <Container>
+                <label>Filter by capacity</label>
+                <input type="number" onChange={(event) => onFilterCars(event)} />
+                <Row>
+                    { cars.map((car) => {
+                        return <Col>
+                        <Card style={{ width: '18rem' }}>
+                            <Card.Img variant="top" src={car.foto} />
+                            <Card.Body>
+                                <Card.Title>{car.name}</Card.Title>
+                                <b>
+                                    <p>Rp. {car.price}</p> / hari
+                                </b>
+                                <Card.Text>
+                                    Capacity { car.capacity }
+                                </Card.Text>
 
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td colSpan={2}>Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                </tbody>
-            </Table>
-
+                                <Button variant="primary">Go somewhere</Button>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    })}
+                    
+                </Row>
+            </Container>
         </div>
     );
 };

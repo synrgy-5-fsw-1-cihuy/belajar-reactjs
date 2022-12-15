@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
+import Content from './components/content/Content';
 import Header from './components/header/Header';
 import { addTask, removeTask, consoleState } from './components/store/Actions';
 // import Contact from './components/contact/Contact';
@@ -41,6 +42,7 @@ function App({ appState, addNewTask, removeLastTask, debugConsoleState }: Action
   return (
     <div className="App">
       <Header />
+      <Content />
       {/* <Router>
          <Routes>
             <Route path='/login' element={<Login />} />

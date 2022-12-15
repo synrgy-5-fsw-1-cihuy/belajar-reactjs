@@ -11,7 +11,7 @@ import rootReducer from './components/store/reducer/index';
 const store = createStore(rootReducer);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-console.log("STATE IN REDUX STORE :", store.getState());
+// console.log("STATE IN REDUX STORE :", store.getState());
 root.render(
     <React.StrictMode>
       <Provider store={store}>
