@@ -10,11 +10,7 @@ const CARS_ENDPOINT_URL = 'http://localhost:8001/api/cars';
 
 const Content = () => {
     const [cars, setCars] = useState([]);
-    const [filterCarParams, setFilterCar] = useState({
-        capacity: '',
-        booking_date: '',
-        booking_time: ''
-    });
+    const [filterCarParams, setFilterCar] = useState({});
 
     useEffect(() => {
         getAllCars();
@@ -22,17 +18,30 @@ const Content = () => {
 
     const getAllCars = async () => {
         const cars = await axios.get(CARS_ENDPOINT_URL);
+        console.log(cars.data.data);
         setCars(cars.data.data);
     };
 
     const onFilterCarCapacityParam = async (event) => {
+        const capacityParam = event.target.value;
+
+        if (capacityParam === null || capacityParam === "") {
+            getAllCars();
+        }
+
         setFilterCar((prevState) => ({
             ...prevState,
-            capacity: event.target.value
+            capacity: capacityParam
         }));
     };
 
     const onFilterCarBookingDateParam = async(event) => {
+        const bookingDateParam = event.target.value;
+
+        if (bookingDateParam === null || bookingDateParam === "") {
+            getAllCars();
+        }
+
         setFilterCar((prevState) => ({
             ...prevState,
             booking_date: event.target.value
@@ -40,6 +49,12 @@ const Content = () => {
     };
 
     const onFilterCarBookingTimeParam = async(event) => {
+        const bookingTimeParam = event.target.value;
+
+        if (bookingTimeParam === null || bookingTimeParam === "") {
+            getAllCars();
+        }
+
         setFilterCar((prevState) => ({
             ...prevState,
             booking_time: event.target.value
@@ -47,10 +62,20 @@ const Content = () => {
     };
 
     const onEventSubmitFilter = (event) => {
-        const bookingDatesTime = filterCarParams.booking_date +'T'+ filterCarParams.booking_time + ':00Z';
-        const bookingDateParsed = Date.parse(bookingDatesTime);
+        if(filterCarParams.booking_date != null && filterCarParams.booking_time != null) {
+            const bookingDateParam = filterCarParams.booking_date +'T'+ filterCarParams.booking_time + ':00Z';
+
+
+            console.log(bookingDateParam);
+
+            setFilterCar((prevState) => ({
+                ...prevState,
+                booking_date_parsed: bookingDateParam
+            }));
+        }
 
         onShowFilterCars(filterCarParams);
+        console.log(filterCarParams);
 
         event.preventDefault();
     };
@@ -60,6 +85,11 @@ const Content = () => {
             const cars = await axios.get(CARS_ENDPOINT_URL + '?capacity=' + filter.capacity);
             setCars(cars.data.data);
         };
+
+        if (filter.booking_date_parsed != null) {
+            const filterCarsBookingDate = await axios.get(CARS_ENDPOINT_URL + '?bookingDate=' + filter.booking_date_parsed);
+            setCars(filterCarsBookingDate.data.data);
+        }
     };
 
     return (
