@@ -14,30 +14,29 @@ import { addTask, removeTask, consoleState } from './components/store/Actions';
 // import { addTask } from './components/store/Actions';
 type ActionProps = {
   appState: {
-    peoples: []
-  },
-  addNewTask: Function,
-  removeLastTask: Function,
-  debugConsoleState: Function
-}
+    peoples: [];
+  };
+  addNewTask: Function;
+  removeLastTask: Function;
+  debugConsoleState: Function;
+};
 
 function App({ appState, addNewTask, removeLastTask, debugConsoleState }: ActionProps) {
-
   const handleAddTask = () => {
     addNewTask('Ganda');
-  }
+  };
 
   const handleRemoveTask = () => {
     removeLastTask();
-  }
+  };
 
   const handleDebugConsoleState = () => {
     debugConsoleState();
-  }
+  };
 
   useEffect(() => {
-    console.log("STATE COMP :", appState);
-  }, [appState])
+    console.log('STATE COMP :', appState);
+  }, [appState]);
 
   return (
     <div className="App">
@@ -57,8 +56,8 @@ function App({ appState, addNewTask, removeLastTask, debugConsoleState }: Action
       <button onClick={() => handleDebugConsoleState()}>Debug Console State</button>
       <h3>List tasks</h3>
       <div>
-        { appState.peoples.map((peop: any, index: any) => {
-          return <li key={index}>{peop}</li>
+        {appState.peoples.map((peop: any, index: any) => {
+          return <li key={index}>{peop}</li>;
         })}
       </div>
     </div>
